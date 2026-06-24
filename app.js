@@ -415,6 +415,9 @@ function goStep(index) {
   renderNav();
   updateAll();
   scrollToCurrentSection();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(scrollToCurrentSection);
+  });
 }
 
 function scrollToCurrentSection() {
