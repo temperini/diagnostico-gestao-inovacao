@@ -13,7 +13,6 @@
     <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></symbol>
     <symbol id="icon-alert" viewBox="0 0 24 24"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2.8 18a2 2 0 0 0 1.8 3h14.8a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></symbol>
     <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v2"/><path d="M12 9v8"/><path d="M17 5v12"/></symbol>
-    <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></symbol>
     <symbol id="icon-spark" viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8Z"/></symbol>
     <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></symbol>
     <symbol id="icon-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></symbol>
@@ -23,12 +22,8 @@
 
   <div class="app-shell">
     <aside class="sidebar" aria-label="Navegacao do diagnostico">
-      <div class="brand brand-dark">
-        <img src="assets/logo-dark.png" alt="Tech Lemonade">
-      </div>
-      <div class="brand brand-light">
-        <img src="assets/logo-light.png" alt="Tech Lemonade">
-      </div>
+      <div class="brand brand-dark"><img src="assets/logo-dark.png" alt="Tech Lemonade"></div>
+      <div class="brand brand-light"><img src="assets/logo-light.png" alt="Tech Lemonade"></div>
 
       <div class="project-badge">
         <span>GI42001-6</span>
@@ -50,17 +45,9 @@
           <h1>Primeira reuniao com cliente</h1>
         </div>
         <div class="topbar-actions">
-          <button class="icon-button ghost" id="themeToggle" title="Alternar tema" type="button">
-            <svg><use href="#icon-spark"></use></svg>
-          </button>
-          <button class="button secondary" id="newDiagnostic" type="button">
-            <svg><use href="#icon-plus"></use></svg>
-            Novo
-          </button>
-          <button class="button primary" id="saveDiagnostic" type="button">
-            <svg><use href="#icon-save"></use></svg>
-            Salvar
-          </button>
+          <button class="icon-button ghost" id="themeToggle" title="Alternar tema" type="button"><svg><use href="#icon-spark"></use></svg></button>
+          <button class="button secondary" id="newDiagnostic" type="button"><svg><use href="#icon-plus"></use></svg>Novo</button>
+          <button class="button primary" id="saveDiagnostic" type="button"><svg><use href="#icon-save"></use></svg>Salvar</button>
         </div>
       </header>
 
@@ -71,34 +58,21 @@
           <p>Capture evidencias, reduza risco de escopo e gere um resumo pronto para proposta.</p>
         </div>
         <div class="hero-metrics" aria-label="Resumo do diagnostico">
-          <div>
-            <span id="completionMetric">0%</span>
-            <small>preenchido</small>
-          </div>
-          <div>
-            <span id="riskMetric">Baixo</span>
-            <small>risco</small>
-          </div>
-          <div>
-            <span id="goMetric">A validar</span>
-            <small>decisao</small>
-          </div>
+          <div><span id="completionMetric">0%</span><small>preenchido</small></div>
+          <div><span id="riskMetric">Baixo</span><small>risco</small></div>
+          <div><span id="goMetric">A validar</span><small>decisao</small></div>
         </div>
       </section>
 
       <div class="workspace">
         <section class="form-card" aria-labelledby="currentSectionTitle">
           <div class="section-header">
-            <button class="icon-button ghost" id="prevStep" type="button" title="Etapa anterior">
-              <span aria-hidden="true">â†</span>
-            </button>
+            <button class="icon-button ghost" id="prevStep" type="button" title="Etapa anterior"><span aria-hidden="true">&larr;</span></button>
             <div>
               <p class="eyebrow" id="sectionCounter">Etapa 1 de 9</p>
               <h2 id="currentSectionTitle">Perfil da empresa</h2>
             </div>
-            <button class="icon-button ghost" id="nextStep" type="button" title="Proxima etapa">
-              <span aria-hidden="true">â†’</span>
-            </button>
+            <button class="icon-button ghost" id="nextStep" type="button" title="Proxima etapa"><span aria-hidden="true">&rarr;</span></button>
           </div>
 
           <form id="diagnosticForm" autocomplete="off"></form>
@@ -106,9 +80,7 @@
 
         <aside class="insights" aria-label="Painel de insights">
           <section class="score-card">
-            <div class="score-ring" id="scoreRing" style="--score: 0">
-              <span id="scoreValue">0</span>
-            </div>
+            <div class="score-ring" id="scoreRing" style="--score: 0"><span id="scoreValue">0</span></div>
             <div>
               <p class="eyebrow">Indice de prontidao</p>
               <h3 id="scoreLabel">Aguardando dados</h3>
@@ -117,26 +89,17 @@
           </section>
 
           <section class="mini-panel">
-            <div class="panel-title">
-              <svg><use href="#icon-chart"></use></svg>
-              <h3>Scores</h3>
-            </div>
+            <div class="panel-title"><svg><use href="#icon-chart"></use></svg><h3>Scores</h3></div>
             <div class="bars" id="scoreBars"></div>
           </section>
 
           <section class="mini-panel">
-            <div class="panel-title">
-              <svg><use href="#icon-alert"></use></svg>
-              <h3>Alertas consultivos</h3>
-            </div>
+            <div class="panel-title"><svg><use href="#icon-alert"></use></svg><h3>Alertas consultivos</h3></div>
             <ul class="alerts-list" id="alertsList"></ul>
           </section>
 
           <section class="mini-panel">
-            <div class="panel-title">
-              <svg><use href="#icon-file"></use></svg>
-              <h3>Exportar</h3>
-            </div>
+            <div class="panel-title"><svg><use href="#icon-file"></use></svg><h3>Exportar</h3></div>
             <div class="export-grid">
               <button class="button secondary" data-export="markdown" type="button">Markdown</button>
               <button class="button secondary" data-export="json" type="button">JSON</button>
@@ -145,10 +108,7 @@
           </section>
 
           <section class="mini-panel">
-            <div class="panel-title">
-              <svg><use href="#icon-save"></use></svg>
-              <h3>Historico local</h3>
-            </div>
+            <div class="panel-title"><svg><use href="#icon-save"></use></svg><h3>Historico local</h3></div>
             <div class="history-list" id="historyList"></div>
           </section>
         </aside>
@@ -158,6 +118,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="app.js?v=a771486cdaa30dadab76af1219d67748a3f5a0af"></script>
+  <script src="app.js?v=manual-next-section-20260624"></script>
 </body>
 </html>

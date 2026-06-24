@@ -179,46 +179,35 @@ function renderForm() {
   const section = sections[state.currentStep];
   $("#sectionCounter").textContent = `Etapa ${state.currentStep + 1} de ${sections.length}`;
   $("#currentSectionTitle").textContent = section.title;
-  $("#diagnosticForm").innerHTML = section.fields.map(renderField).join("");
+  $("#diagnosticForm").innerHTML = [
+    ...section.fields.map(renderField),
+    renderSectionFooter()
+  ].join("");
 
   section.fields.forEach((field) => {
     if (field.type === "choice") {
       $$(`input[name="${field.id}"]`).forEach((input) => {
         input.addEventListener("change", () => {
-          updateField(section, field.id, input.value, { autoAdvance: true });
+          updateField(field.id, input.value);
         });
       });
       return;
     }
     const input = document.getElementById(field.id);
     input.addEventListener("input", () => {
-      updateField(section, field.id, input.value);
+      updateField(field.id, input.value);
     });
     input.addEventListener("change", () => {
-      updateField(section, field.id, input.value, { autoAdvance: true });
+      updateField(field.id, input.value);
     });
   });
+
+  $("#nextIncompleteStep").addEventListener("click", goNextIncompleteStep);
 }
 
-function updateField(section, fieldId, value, options = {}) {
-  const completionBefore = sectionCompletion(section);
+function updateField(fieldId, value) {
   state.data[fieldId] = value;
-  const completionAfter = sectionCompletion(section);
   updateAll();
-  if (!options.autoAdvance) return;
-  maybeAdvanceAfterCompletion(section, completionBefore, completionAfter);
-}
-
-function maybeAdvanceAfterCompletion(section, completionBefore, completionAfter) {
-  const sectionIndex = sections.findIndex((candidate) => candidate.id === section.id);
-  const hasNextSection = sectionIndex >= 0 && sectionIndex < sections.length - 1;
-  if (!hasNextSection || completionBefore >= 100 || completionAfter < 100) return;
-
-  window.setTimeout(() => {
-    if (state.currentStep === sectionIndex && sectionCompletion(section) === 100) {
-      goStep(sectionIndex + 1);
-    }
-  }, 420);
 }
 
 function renderField(field) {
@@ -262,9 +251,29 @@ function renderField(field) {
   `;
 }
 
+function renderSectionFooter() {
+  const nextIndex = nextIncompleteStepIndex();
+  const nextText = nextIndex >= 0
+    ? `Proxima: ${sections[nextIndex].short}`
+    : "Todas as secoes estao completas";
+
+  return `
+    <div class="section-footer">
+      <div>
+        <strong id="sectionCompletionText">${sectionCompletion(sections[state.currentStep])}% desta secao</strong>
+        <small id="nextIncompleteText">${nextText}</small>
+      </div>
+      <button class="button primary" id="nextIncompleteStep" type="button" ${nextIndex < 0 ? "disabled" : ""}>
+        Proxima secao
+      </button>
+    </div>
+  `;
+}
+
 function updateAll() {
   saveDraft();
   renderNav();
+  updateSectionFooter();
   updateHero();
   updateScores();
   updateAlerts();
@@ -364,6 +373,34 @@ function totalCompletion() {
     return value !== undefined && String(value).trim() !== "";
   }).length;
   return Math.round((filled / fields.length) * 100);
+}
+
+function nextIncompleteStepIndex() {
+  return sections.findIndex((section, index) => index > state.currentStep && sectionCompletion(section) < 100);
+}
+
+function goNextIncompleteStep() {
+  const nextIndex = nextIncompleteStepIndex();
+  if (nextIndex < 0) {
+    showToast("Todas as proximas secoes ja estao completas.");
+    return;
+  }
+  goStep(nextIndex);
+}
+
+function updateSectionFooter() {
+  const footer = $(".section-footer");
+  if (!footer) return;
+
+  const nextIndex = nextIncompleteStepIndex();
+  const nextText = nextIndex >= 0
+    ? `Proxima: ${sections[nextIndex].short}`
+    : "Todas as secoes estao completas";
+  const button = $("#nextIncompleteStep");
+
+  $("#sectionCompletionText").textContent = `${sectionCompletion(sections[state.currentStep])}% desta secao`;
+  $("#nextIncompleteText").textContent = nextText;
+  button.disabled = nextIndex < 0;
 }
 
 function decisionLabel(score) {

@@ -333,6 +333,14 @@ h3 {
   transform: translateY(0) scale(.98);
 }
 
+.button:disabled,
+.icon-button:disabled {
+  cursor: not-allowed;
+  opacity: .52;
+  transform: none;
+  box-shadow: none;
+}
+
 .button {
   padding: .65rem .9rem;
 }
@@ -546,6 +554,31 @@ h3 {
 
 .choice span:hover {
   transform: translateY(-1px);
+}
+
+.section-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .9rem;
+  margin-top: .25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.section-footer div {
+  display: grid;
+  gap: .2rem;
+}
+
+.section-footer strong {
+  font-size: .9rem;
+}
+
+.section-footer small {
+  color: var(--muted);
+  font-weight: 750;
 }
 
 .insights {
@@ -822,6 +855,15 @@ h3 {
 
   .section-header {
     grid-template-columns: auto 1fr auto;
+  }
+
+  .section-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .section-footer .button {
+    width: 100%;
   }
 
   .export-grid {
