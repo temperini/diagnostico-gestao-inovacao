@@ -24,26 +24,14 @@
     <aside class="sidebar" aria-label="Navegacao do diagnostico">
       <div class="brand brand-dark"><img src="assets/logo-dark.png" alt="Tech Lemonade"></div>
       <div class="brand brand-light"><img src="assets/logo-light.png" alt="Tech Lemonade"></div>
-
-      <div class="project-badge">
-        <span>GI42001-6</span>
-        <strong>Gestao da Inovacao</strong>
-      </div>
-
+      <div class="project-badge"><span>GI42001-6</span><strong>Gestao da Inovacao</strong></div>
       <nav class="step-nav" id="stepNav"></nav>
-
-      <div class="privacy-note">
-        <svg><use href="#icon-shield"></use></svg>
-        <p><strong>Local-first.</strong> Os dados ficam neste navegador. Exporte os arquivos para anexar ao projeto.</p>
-      </div>
+      <div class="privacy-note"><svg><use href="#icon-shield"></use></svg><p><strong>Local-first.</strong> Os dados ficam neste navegador. Exporte os arquivos para anexar ao projeto.</p></div>
     </aside>
 
     <main class="main">
       <header class="topbar">
-        <div>
-          <p class="eyebrow">Diagnostico consultivo</p>
-          <h1>Primeira reuniao com cliente</h1>
-        </div>
+        <div><p class="eyebrow">Diagnostico consultivo</p><h1>Primeira reuniao com cliente</h1></div>
         <div class="topbar-actions">
           <button class="icon-button ghost" id="themeToggle" title="Alternar tema" type="button"><svg><use href="#icon-spark"></use></svg></button>
           <button class="button secondary" id="newDiagnostic" type="button"><svg><use href="#icon-plus"></use></svg>Novo</button>
@@ -52,11 +40,7 @@
       </header>
 
       <section class="hero-panel">
-        <div>
-          <p class="eyebrow">Cliente ativo</p>
-          <h2 id="clientHero">Lemonildo Mercadinhos</h2>
-          <p>Capture evidencias, reduza risco de escopo e gere um resumo pronto para proposta.</p>
-        </div>
+        <div><p class="eyebrow">Cliente ativo</p><h2 id="clientHero">Lemonildo Mercadinhos</h2><p>Capture evidencias, reduza risco de escopo e gere um resumo pronto para proposta.</p></div>
         <div class="hero-metrics" aria-label="Resumo do diagnostico">
           <div><span id="completionMetric">0%</span><small>preenchido</small></div>
           <div><span id="riskMetric">Baixo</span><small>risco</small></div>
@@ -68,56 +52,24 @@
         <section class="form-card" aria-labelledby="currentSectionTitle">
           <div class="section-header">
             <button class="icon-button ghost" id="prevStep" type="button" title="Etapa anterior"><span aria-hidden="true">&larr;</span></button>
-            <div>
-              <p class="eyebrow" id="sectionCounter">Etapa 1 de 9</p>
-              <h2 id="currentSectionTitle">Perfil da empresa</h2>
-            </div>
+            <div><p class="eyebrow" id="sectionCounter">Etapa 1 de 9</p><h2 id="currentSectionTitle">Perfil da empresa</h2></div>
             <button class="icon-button ghost" id="nextStep" type="button" title="Proxima etapa"><span aria-hidden="true">&rarr;</span></button>
           </div>
-
           <form id="diagnosticForm" autocomplete="off"></form>
         </section>
 
         <aside class="insights" aria-label="Painel de insights">
-          <section class="score-card">
-            <div class="score-ring" id="scoreRing" style="--score: 0"><span id="scoreValue">0</span></div>
-            <div>
-              <p class="eyebrow">Indice de prontidao</p>
-              <h3 id="scoreLabel">Aguardando dados</h3>
-              <p id="scoreText">Preencha o diagnostico para calcular maturidade, viabilidade e risco.</p>
-            </div>
-          </section>
-
-          <section class="mini-panel">
-            <div class="panel-title"><svg><use href="#icon-chart"></use></svg><h3>Scores</h3></div>
-            <div class="bars" id="scoreBars"></div>
-          </section>
-
-          <section class="mini-panel">
-            <div class="panel-title"><svg><use href="#icon-alert"></use></svg><h3>Alertas consultivos</h3></div>
-            <ul class="alerts-list" id="alertsList"></ul>
-          </section>
-
-          <section class="mini-panel">
-            <div class="panel-title"><svg><use href="#icon-file"></use></svg><h3>Exportar</h3></div>
-            <div class="export-grid">
-              <button class="button secondary" data-export="markdown" type="button">Markdown</button>
-              <button class="button secondary" data-export="json" type="button">JSON</button>
-              <button class="button secondary" data-export="csv" type="button">CSV</button>
-            </div>
-          </section>
-
-          <section class="mini-panel">
-            <div class="panel-title"><svg><use href="#icon-save"></use></svg><h3>Historico local</h3></div>
-            <div class="history-list" id="historyList"></div>
-          </section>
+          <section class="score-card"><div class="score-ring" id="scoreRing" style="--score: 0"><span id="scoreValue">0</span></div><div><p class="eyebrow">Indice de prontidao</p><h3 id="scoreLabel">Aguardando dados</h3><p id="scoreText">Preencha o diagnostico para calcular maturidade, viabilidade e risco.</p></div></section>
+          <section class="mini-panel"><div class="panel-title"><svg><use href="#icon-chart"></use></svg><h3>Scores</h3></div><div class="bars" id="scoreBars"></div></section>
+          <section class="mini-panel"><div class="panel-title"><svg><use href="#icon-alert"></use></svg><h3>Alertas consultivos</h3></div><ul class="alerts-list" id="alertsList"></ul></section>
+          <section class="mini-panel"><div class="panel-title"><svg><use href="#icon-file"></use></svg><h3>Exportar</h3></div><div class="export-grid"><button class="button secondary" data-export="markdown" type="button">Markdown</button><button class="button secondary" data-export="json" type="button">JSON</button><button class="button secondary" data-export="csv" type="button">CSV</button></div></section>
+          <section class="mini-panel"><div class="panel-title"><svg><use href="#icon-save"></use></svg><h3>Historico local</h3></div><div class="history-list" id="historyList"></div></section>
         </aside>
       </div>
     </main>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script src="app.js?v=manual-next-section-20260624"></script>
+  <script src="app.js?v=manual-next-section-force-20260624"></script>
 </body>
 </html>
