@@ -185,18 +185,40 @@ function renderForm() {
     if (field.type === "choice") {
       $$(`input[name="${field.id}"]`).forEach((input) => {
         input.addEventListener("change", () => {
-          state.data[field.id] = input.value;
-          updateAll();
+          updateField(section, field.id, input.value, { autoAdvance: true });
         });
       });
       return;
     }
     const input = document.getElementById(field.id);
     input.addEventListener("input", () => {
-      state.data[field.id] = input.value;
-      updateAll();
+      updateField(section, field.id, input.value);
+    });
+    input.addEventListener("change", () => {
+      updateField(section, field.id, input.value, { autoAdvance: true });
     });
   });
+}
+
+function updateField(section, fieldId, value, options = {}) {
+  const completionBefore = sectionCompletion(section);
+  state.data[fieldId] = value;
+  const completionAfter = sectionCompletion(section);
+  updateAll();
+  if (!options.autoAdvance) return;
+  maybeAdvanceAfterCompletion(section, completionBefore, completionAfter);
+}
+
+function maybeAdvanceAfterCompletion(section, completionBefore, completionAfter) {
+  const sectionIndex = sections.findIndex((candidate) => candidate.id === section.id);
+  const hasNextSection = sectionIndex >= 0 && sectionIndex < sections.length - 1;
+  if (!hasNextSection || completionBefore >= 100 || completionAfter < 100) return;
+
+  window.setTimeout(() => {
+    if (state.currentStep === sectionIndex && sectionCompletion(section) === 100) {
+      goStep(sectionIndex + 1);
+    }
+  }, 420);
 }
 
 function renderField(field) {
@@ -355,7 +377,17 @@ function goStep(index) {
   renderForm();
   renderNav();
   updateAll();
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  scrollToCurrentSection();
+}
+
+function scrollToCurrentSection() {
+  const target = $(".form-card");
+  if (!target) return;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({
+    behavior: prefersReducedMotion ? "auto" : "smooth",
+    block: "start"
+  });
 }
 
 function saveDiagnostic() {
